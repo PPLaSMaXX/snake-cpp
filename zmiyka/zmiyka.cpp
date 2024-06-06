@@ -63,7 +63,7 @@ int field[20][40] =
 
 int input()
 {
-	this_thread::sleep_for(chrono::microseconds(98000 + (shift/2) * 2000));
+	this_thread::sleep_for(chrono::microseconds(98000 + (shift / 2) * 2000));
 	if (_kbhit())
 	{
 		int input[2];
@@ -82,7 +82,6 @@ int input()
 
 void output()
 {
-
 	for (int y = 0; y < sizeof(field) / sizeof(field[0]); y++)
 	{
 		for (int x = 0; x < sizeof(field[0]) / sizeof(int); x++)
@@ -98,11 +97,11 @@ void output()
 
 				switch (field[y][x])
 				{
-					case 4: out = L"#"; break;
-					case 1: out = L" "; break;
-					case 2: out = L"Ø"; break;
-					case 3: out = L"█"; break;
-					case 5:	out = L"@"; break;
+				case 4: out = L"#"; break;
+				case 1: out = L" "; break;
+				case 2: out = L"Ø"; break;
+				case 3: out = L"█"; break;
+				case 5:	out = L"@"; break;
 				}
 
 				here.Y = y;
@@ -137,7 +136,7 @@ void apple()
 	{
 		while (true)
 		{
-			srand(time(0)+1);
+			srand(time(0) + 1);
 			randxBig = rand() % 18 + 1;
 			randyBig = rand() % 38 + 1;
 			if (field[randxBig][randyBig] != 3 && field[randxBig][randyBig] != 2) break;
@@ -174,9 +173,9 @@ bool snake(int move)
 
 		if (field[ordinate][absciss] == 3 && shift > 1)
 		{
-			system("cls");
+			//system("cls");
 			SetConsoleTextAttribute(hStdOut, 12);
-			cout << "GAME OVER!!!!" << endl;
+			cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGAME OVER!!!!" << endl;
 			cout << "RESULT: " << shift << endl;
 			return false;
 		}
@@ -191,7 +190,7 @@ bool snake(int move)
 	return true;
 }
 
-void procces()
+void process()
 {
 	snakebody.push_back(snakeBody(1, 1));
 	bool gameStatus = true;
@@ -203,22 +202,22 @@ void procces()
 	{
 		apple();
 		output();
-
+		int previous_move = move;
 		int x = input();
 
-		if (x == 119 || x == 230 || 296 == x + 224)
+		if (previous_move != 3 && (x == 119 || x == 230 || 296 == x + 224))
 		{
 			move = 1;
 		}
-		else if (x == 97 || x == 228 || 299 == x + 224)
+		else if (previous_move != 4 && (x == 97 || x == 228 || 299 == x + 224))
 		{
 			move = 2;
 		}
-		else if (x == 115 || x == 63 || x == 235 || 304 == x + 224)
+		else if (previous_move != 1 && (x == 115 || x == 63 || x == 235 || 304 == x + 224))
 		{
 			move = 3;
 		}
-		else if (x == 100 || x == 162 || 301 == x + 224)
+		else if (previous_move != 2 && (x == 100 || x == 162 || 301 == x + 224))
 		{
 			move = 4;
 		}
@@ -230,5 +229,5 @@ void procces()
 int main()
 {
 	ShowConsoleCursor(false);
-	procces();
+	process();
 }
